@@ -20,10 +20,12 @@ package main
 import (
 	"fmt"
 	"log"
+
+	"github.com/edgelaboratories/interpolator"
 )
 
 func main() {
-	xys := XYs{
+	xys := interpolator.XYs{
 		{
 			X: 0.0,
 			Y: 1.2,
@@ -37,7 +39,7 @@ func main() {
 			Y: 1.4,
 		},
 	}
-	interp, err := NewGeometric(xys)
+	interp, err := interpolator.NewGeometric(xys)
 	if err != nil {
 		log.Fatal(err)
 	}
