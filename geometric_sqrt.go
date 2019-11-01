@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// GeometricSqrt is a geometric interpolator scaled with a square root.
+// GeometricSqrt performs a geometric interpolation with respect to the square root of the abscissae
 type GeometricSqrt struct {
 	xys XYs
 }
@@ -27,7 +27,7 @@ func NewGeometricSqrt(xys XYs) (*GeometricSqrt, error) {
 	}, nil
 }
 
-// Value compute the value of f(x) based on geometric sqrt interpolation with threshold.
+// Value compute the value of f(x) based on geometric sqrt interpolation with flat extrapolation.
 func (interp GeometricSqrt) Value(x float64) float64 {
 	p1, p2 := interp.xys.Interval(x)
 	if x <= p1.X {
