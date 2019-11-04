@@ -40,6 +40,5 @@ func (interp PiecewiseLinearSqrt) Gradient(x float64) float64 {
 	if x <= p1.X || x >= p2.X {
 		return 0.0
 	}
-	lambda := math.Sqrt((x - p1.X) / (p2.X - p1.X))
-	return (p2.Y - p1.Y) / (lambda * (p2.X - p1.X))
+	return 0.5 * (p2.Y - p1.Y) / math.Sqrt((p2.X-p1.X)*(x-p1.X))
 }
