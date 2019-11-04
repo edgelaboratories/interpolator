@@ -46,7 +46,7 @@ func (interp GeometricSqrt) Gradient(x float64) float64 {
 	if x <= p1.X || x >= p2.X {
 		return 0.0
 	}
-	H := p2.X - p1.X
-	lambda := math.Sqrt((x - p1.X) / H)
-	return 0.5 * math.Log(p2.Y/p1.Y) * math.Pow(p1.Y, (1.0-lambda)) * math.Pow(p2.Y, lambda) / (lambda * H)
+	h := p2.X - p1.X
+	lambda := math.Sqrt((x - p1.X) / h)
+	return 0.5 * math.Log(p2.Y/p1.Y) * math.Pow(p1.Y, (1.0-lambda)) * math.Pow(p2.Y, lambda) / (lambda * h)
 }
