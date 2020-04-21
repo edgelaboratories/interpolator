@@ -18,8 +18,8 @@ type Geometric struct {
 // The input `xys` must be ordered, have unique abscissas
 // and positive ordinates.
 func NewGeometric(xys XYs) (*Geometric, error) {
-	if l := len(xys); l < 2 {
-		return nil, fmt.Errorf("at least 2 points are required to build a geometric interpolator, but got %d", l)
+	if l := len(xys); l < 1 {
+		return nil, fmt.Errorf("at least 1 points is required to build a geometric interpolator, but got %d", l)
 	}
 	for _, xy := range xys {
 		if xy.Y < epsilon {
@@ -33,6 +33,9 @@ func NewGeometric(xys XYs) (*Geometric, error) {
 
 // Value compute the value of f(x) based on geometric interpolation.
 func (interp Geometric) Value(x float64) float64 {
+	if n := len(interp.xys); n == 1 {
+		return interp.xys[0].Y
+	}
 	p1, p2 := interp.xys.Interval(x)
 	lambda := (x - p1.X) / (p2.X - p1.X)
 	return math.Pow(p1.Y, (1.0-lambda)) * math.Pow(p2.Y, lambda)
@@ -40,6 +43,9 @@ func (interp Geometric) Value(x float64) float64 {
 
 // Gradient computes the gradient of f(x) based on geometric interpolation.
 func (interp Geometric) Gradient(x float64) float64 {
+	if n := len(interp.xys); n == 1 {
+		return 0.0
+	}
 	p1, p2 := interp.xys.Interval(x)
 	return math.Log(p2.Y/p1.Y) * interp.Value(x) / (p2.X - p1.X)
 }

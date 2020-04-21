@@ -42,14 +42,22 @@ func TestNewGeometricSqrtEmptyXYs(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestNewGeometricSqrtInsufficientXYs(t *testing.T) {
-	_, err := NewGeometricSqrt(XYs{
+func TestNewGeometricSqrtSinglePoint(t *testing.T) {
+	interpolator, err := NewGeometricSqrt(XYs{
 		{
 			X: 0.0,
 			Y: 1.0,
 		},
 	})
-	assert.Error(t, err)
+	assert.NoError(t, err)
+
+	assert.Equal(t, 1.0, interpolator.Value(-1.0))
+	assert.Equal(t, 1.0, interpolator.Value(0.0))
+	assert.Equal(t, 1.0, interpolator.Value(1.0))
+
+	assert.Equal(t, 0.0, interpolator.Gradient(-1.0))
+	assert.Equal(t, 0.0, interpolator.Gradient(0.0))
+	assert.Equal(t, 0.0, interpolator.Gradient(1.0))
 }
 
 func TestNewGeometricSqrtInvalidXYs(t *testing.T) {

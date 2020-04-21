@@ -18,14 +18,22 @@ func TestNewPiecewiseLinearThresholdEmptyXYs(t *testing.T) {
 	assert.Error(t, err)
 }
 
-func TestNewPiecewiseLinearThresholdInsufficientXYs(t *testing.T) {
-	_, err := NewPiecewiseLinearThreshold(XYs{
+func TestNewPiecewiseLinearThresholdSinglePoint(t *testing.T) {
+	interpolator, err := NewPiecewiseLinearThreshold(XYs{
 		{
 			X: 0.0,
 			Y: 1.0,
 		},
 	})
-	assert.Error(t, err)
+	assert.NoError(t, err)
+
+	assert.Equal(t, 1.0, interpolator.Value(-1.0))
+	assert.Equal(t, 1.0, interpolator.Value(0.0))
+	assert.Equal(t, 1.0, interpolator.Value(1.0))
+
+	assert.Equal(t, 0.0, interpolator.Gradient(-1.0))
+	assert.Equal(t, 0.0, interpolator.Gradient(0.0))
+	assert.Equal(t, 0.0, interpolator.Gradient(1.0))
 }
 
 func TestPiecewiseLinearThresholdValue(t *testing.T) {
