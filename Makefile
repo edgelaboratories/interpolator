@@ -6,4 +6,6 @@ build:
 
 .PHONY: test
 test:
-	GO111MODULE=on go test -race ./...
+	mkdir -p bin
+	go test -tags=integration --race -coverprofile=bin/cover.out ./...
+	go tool cover -html=bin/cover.out -o bin/cover.html
