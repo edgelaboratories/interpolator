@@ -18,6 +18,19 @@ func TestNewPiecewiseConstantEmptyXYs(t *testing.T) {
 	assert.Error(t, err)
 }
 
+func TestPiecewiseConstantValue_SinglePoint(t *testing.T) {
+	interpolator, err := NewPiecewiseConstant(XYs{
+		{
+			X: 0.0,
+			Y: 0.0,
+		},
+	})
+	assert.NoError(t, err)
+	assert.Equal(t, 0.0, interpolator.Value(-1.0))
+	assert.Equal(t, 0.0, interpolator.Value(0.0))
+	assert.Equal(t, 0.0, interpolator.Value(1.0))
+}
+
 func TestPiecewiseConstantValue(t *testing.T) {
 	tolerance := 1.0e-8
 	interpolator, err := NewPiecewiseConstant(testLinearXYs)
