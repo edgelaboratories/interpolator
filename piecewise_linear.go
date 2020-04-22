@@ -20,6 +20,7 @@ func NewPiecewiseLinear(xys XYs) (*PiecewiseLinear, error) {
 // Value compute the value of f(x) based on piecewise linear interpolation.
 func (interp PiecewiseLinear) Value(x float64) float64 {
 	if n := len(interp.xys); n == 1 {
+		// In case a single data point is provided, assume a constant curve
 		return interp.xys[0].Y
 	}
 	p1, p2 := interp.xys.Interval(x)
@@ -30,6 +31,7 @@ func (interp PiecewiseLinear) Value(x float64) float64 {
 // Gradient computes the gradient of f(x) based on linear interpolation.
 func (interp PiecewiseLinear) Gradient(x float64) float64 {
 	if n := len(interp.xys); n == 1 {
+		// In case a single data point is provided, assume a constant curve
 		return 0.0
 	}
 	p1, p2 := interp.xys.Interval(x)
