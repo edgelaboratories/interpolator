@@ -14,8 +14,8 @@ type GeometricSqrt struct {
 // The input `xys` must be ordered, have unique abscissas
 // and positive ordinates.
 func NewGeometricSqrt(xys XYs) (*GeometricSqrt, error) {
-	if l := len(xys); l < 2 {
-		return nil, fmt.Errorf("at least 2 points are required to build a geometric sqrt interpolator, but got %d", l)
+	if l := len(xys); l < 1 {
+		return nil, fmt.Errorf("at least 1 points is required to build a geometric sqrt interpolator, but got %d", l)
 	}
 	for _, xy := range xys {
 		if xy.Y < epsilon {
@@ -29,6 +29,9 @@ func NewGeometricSqrt(xys XYs) (*GeometricSqrt, error) {
 
 // Value compute the value of f(x) based on geometric sqrt interpolation with flat extrapolation.
 func (interp GeometricSqrt) Value(x float64) float64 {
+	if n := len(interp.xys); n == 1 {
+		return interp.xys[0].Y
+	}
 	p1, p2 := interp.xys.Interval(x)
 	if x <= p1.X {
 		return p1.Y
@@ -42,6 +45,9 @@ func (interp GeometricSqrt) Value(x float64) float64 {
 
 // Gradient computes the gradient of f(x) based on geometric sqrt interpolation.
 func (interp GeometricSqrt) Gradient(x float64) float64 {
+	if n := len(interp.xys); n == 1 {
+		return 0.0
+	}
 	p1, p2 := interp.xys.Interval(x)
 	if x <= p1.X || x >= p2.X {
 		return 0.0

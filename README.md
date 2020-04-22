@@ -6,7 +6,15 @@
 
 ## Description
 
-Package `interpolator` provides univariate data interpolators.
+Package `interpolator` provides univariate data interpolators:
+
+* [piecewise-constant](piecewise_constant.go) interpolator
+* [piecewise-linear](piecewise_linear.go) interpolator
+* [piecewise-linear with threshold](piecewise_linear_threshold.go): the interpolated value is truncated to the closest in the data range, when the input point is out of the data domain, in order to prevent extrapolation effects
+* [piecewise-geometric](geometric.go)
+* [piecewise-geometric on square-root factor](geometric_sqrt.go): the interpolated value depends on the square root of the normalized distance from data points
+
+The input data is specified by means of a nonempty [slice of two-dimensional points](xy.go) `XYs`. If a single data point is provided, the resulting interpolator **treats the input as a constant** for all abscissae.
 
 ## Installation
 

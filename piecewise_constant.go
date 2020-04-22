@@ -21,6 +21,7 @@ func NewPiecewiseConstant(xys XYs) (*PiecewiseConstant, error) {
 // Value compute the value of f(x) based on piecewise constant interpolation.
 func (interp PiecewiseConstant) Value(x float64) float64 {
 	if n := len(interp.xys); n == 1 {
+		// In case a single data point is provided, assume a constant curve
 		return interp.xys[n-1].Y
 	}
 	p1, p2 := interp.xys.Interval(x)
