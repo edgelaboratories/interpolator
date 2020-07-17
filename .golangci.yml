@@ -2,5 +2,14 @@ linters:
   enable-all: true
   disable:
     - gochecknoglobals
+    - goerr113
+    - gomnd
     - lll
     - wsl
+
+issues:
+  exclude-rules:
+    # Exclude some linters from running on tests files.
+    - path: _test\.go
+      linters:
+        - testpackage

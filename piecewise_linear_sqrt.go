@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// PiecewiseLinearSqrt performs a piecewise linear interpolation with respect to the square root of the abscissae
+// PiecewiseLinearSqrt performs a piecewise linear interpolation with respect to the square root of the abscissae.
 type PiecewiseLinearSqrt struct {
 	xys XYs
 }

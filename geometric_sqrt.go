@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// GeometricSqrt performs a geometric interpolation with respect to the square root of the abscissae
+// GeometricSqrt performs a geometric interpolation with respect to the square root of the abscissae.
 type GeometricSqrt struct {
 	xys XYs
 }
