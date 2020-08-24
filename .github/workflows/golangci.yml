@@ -1,4 +1,4 @@
-name: golangci
+name: GolangCI
 on: [pull_request]
 jobs:
   golangci-lint:
