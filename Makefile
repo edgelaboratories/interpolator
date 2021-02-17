@@ -2,7 +2,7 @@ all: build test
 
 .PHONY: build
 build:
-	GO111MODULE=on go build -race ./...
+	go build -race ./...
 
 .PHONY: test
 test:
