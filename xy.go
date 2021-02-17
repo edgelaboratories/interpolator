@@ -22,5 +22,6 @@ func (xys XYs) Interval(x float64) (XY, XY) {
 		return xys[n-2], xys[n-1]
 	}
 	upperBound := sort.Search(n, func(i int) bool { return xys[i].X > x })
+
 	return xys[upperBound-1], xys[upperBound]
 }

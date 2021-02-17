@@ -12,4 +12,6 @@ issues:
     # Exclude some linters from running on tests files.
     - path: _test\.go
       linters:
+        - forbidigo
+        - paralleltest
         - testpackage
