@@ -6,6 +6,11 @@ linters:
     - gomnd
     - lll
     - wsl
+    - interfacer
+    - scopelint
+    - golint
+    - maligned
+    - varnamelen
 
 issues:
   exclude-rules:
