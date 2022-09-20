@@ -11,6 +11,22 @@ linters:
     - golint
     - maligned
     - varnamelen
+    # Deprecated
+    - exhaustivestruct
+    - scopelint
+    - golint
+    - gomoddirectives
+    - interfacer
+    - maligned
+    - varcheck
+    - deadcode
+    - structcheck
+    - nosnakecase
+    - ifshort
+    # Disabled because of generics
+    - rowserrcheck
+    - sqlclosecheck
+    - wastedassign
 
 issues:
   exclude-rules:
