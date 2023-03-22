@@ -9,3 +9,7 @@ test:
 	mkdir -p bin
 	go test -tags=integration --race -coverprofile=bin/cover.out ./...
 	go tool cover -html=bin/cover.out -o bin/cover.html
+
+.PHONY: lint
+lint:
+	golangci-lint run ./...
