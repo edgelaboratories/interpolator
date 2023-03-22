@@ -35,6 +35,6 @@ func (interp PiecewiseConstant) Value(x float64) float64 {
 }
 
 // Gradient computes the gradient of f(x) based on piecewise constant interpolation.
-func (interp PiecewiseConstant) Gradient(x float64) float64 {
+func (interp PiecewiseConstant) Gradient(float64) float64 {
 	return 0.0
 }
