@@ -23,10 +23,12 @@ linters:
     - structcheck
     - nosnakecase
     - ifshort
+    - depguard # Replaced by gomodguard
     # Disabled because of generics
     - rowserrcheck
     - sqlclosecheck
     - wastedassign
+
 
 issues:
   exclude-rules:
@@ -36,3 +38,11 @@ issues:
         - forbidigo
         - paralleltest
         - testpackage
+
+linters-settings:
+  gomodguard:
+    blocked:
+      # List of blocked modules
+      modules:
+        - github.com/pkg/errors:
+            reason: "This package is archived."
