@@ -12,7 +12,6 @@ linters:
     - maligned
     - varnamelen
     # Deprecated
-    - exhaustivestruct
     - scopelint
     - golint
     - gomoddirectives
