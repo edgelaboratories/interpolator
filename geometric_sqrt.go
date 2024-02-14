@@ -1,6 +1,7 @@
 package interpolator
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
@@ -20,7 +21,7 @@ func NewGeometricSqrt(xys XYs) (*GeometricSqrt, error) {
 
 	for _, xy := range xys {
 		if xy.Y < epsilon {
-			return nil, fmt.Errorf("input xys must have non-negative ordinates")
+			return nil, errors.New("input xys must have non-negative ordinates")
 		}
 	}
 
