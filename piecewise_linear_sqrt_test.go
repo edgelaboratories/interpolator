@@ -34,30 +34,32 @@ var testLinearSqrtXYs = XYs{
 
 func TestNewPiecewiseLinearSqrt(t *testing.T) {
 	_, err := NewPiecewiseLinearSqrt(testLinearXYs)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 }
 
 func TestNewPiecewiseLinearSqrtEmptyXYs(t *testing.T) {
 	_, err := NewPiecewiseLinearSqrt(XYs{})
-	assert.Error(t, err)
+	require.Error(t, err)
 }
 
 func TestNewPiecewiseLinearSqrtSinglePoint(t *testing.T) {
+	const tol = 1e-15
+
 	interpolator, err := NewPiecewiseLinearSqrt(XYs{
 		{
 			X: 0.0,
 			Y: 1.0,
 		},
 	})
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	assert.Equal(t, 1.0, interpolator.Value(-1.0))
-	assert.Equal(t, 1.0, interpolator.Value(0.0))
-	assert.Equal(t, 1.0, interpolator.Value(1.0))
+	assert.InDelta(t, 1.0, interpolator.Value(-1.0), tol)
+	assert.InDelta(t, 1.0, interpolator.Value(0.0), tol)
+	assert.InDelta(t, 1.0, interpolator.Value(1.0), tol)
 
-	assert.Equal(t, 0.0, interpolator.Gradient(-1.0))
-	assert.Equal(t, 0.0, interpolator.Gradient(0.0))
-	assert.Equal(t, 0.0, interpolator.Gradient(1.0))
+	assert.InDelta(t, 0.0, interpolator.Gradient(-1.0), tol)
+	assert.InDelta(t, 0.0, interpolator.Gradient(0.0), tol)
+	assert.InDelta(t, 0.0, interpolator.Gradient(1.0), tol)
 }
 
 func TestPiecewiseLinearSqrtValue(t *testing.T) {
